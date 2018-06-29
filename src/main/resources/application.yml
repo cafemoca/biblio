@@ -16,6 +16,8 @@ spring:
       maximum-pool-size: 2
       minimum-idle: 2
   jpa:
+    database: MYSQL
+    generate-ddl: true
     open-in-view: true
     properties:
       hibernate:
