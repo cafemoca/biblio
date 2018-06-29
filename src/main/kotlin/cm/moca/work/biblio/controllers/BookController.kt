@@ -27,6 +27,21 @@ class BookController(private val bookService: BookService) {
         return ResponseEntity.ok(bookService.findAll(page))
     }
 
+    @GetMapping("title/{title}", MediaType.APPLICATION_JSON_UTF8_VALUE)
+    fun findByTitle(@PathVariable("title") title: String): ResponseEntity<List<Book>> {
+        return ResponseEntity.ok(bookService.findByTitle(title))
+    }
+
+    @GetMapping("author/{author}", MediaType.APPLICATION_JSON_UTF8_VALUE)
+    fun findByAuthor(@PathVariable("author") author: String): ResponseEntity<List<Book>> {
+        return ResponseEntity.ok(bookService.findByAuthor(author))
+    }
+
+    @GetMapping("publisher/{publisher}", MediaType.APPLICATION_JSON_UTF8_VALUE)
+    fun findByPublisher(@PathVariable("publisher") publisher: String): ResponseEntity<List<Book>> {
+        return ResponseEntity.ok(bookService.findByPublisher(publisher))
+    }
+
     @PostMapping("", MediaType.TEXT_PLAIN_VALUE, MediaType.APPLICATION_JSON_UTF8_VALUE)
     fun save(@RequestBody book: Book): ResponseEntity<String> {
         bookService.save(book)

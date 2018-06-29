@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 
+
 @Service
 class BookService(val bookRepository: BookRepository) {
 
@@ -20,8 +21,18 @@ class BookService(val bookRepository: BookRepository) {
     }
 
     @Transactional(readOnly = true)
-    fun findAll() : List<Book> {
-        return bookRepository.findAll()
+    fun findByTitle(title: String) : List<Book> {
+        return bookRepository.findByTitle(title)
+    }
+
+    @Transactional(readOnly = true)
+    fun findByAuthor(author: String) : List<Book> {
+        return bookRepository.findByAuthor(author)
+    }
+
+    @Transactional(readOnly = true)
+    fun findByPublisher(publisher: String) : List<Book> {
+        return bookRepository.findByPublisher(publisher)
     }
 
     @Transactional()
