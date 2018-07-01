@@ -1,5 +1,8 @@
 package cm.moca.work.biblio.services
 
+import au.com.console.jpaspecificationdsl.and
+import au.com.console.jpaspecificationdsl.equal
+import au.com.console.jpaspecificationdsl.like
 import cm.moca.work.biblio.entities.Book
 import cm.moca.work.biblio.repositories.BookRepository
 import com.nhaarman.mockito_kotlin.doReturn
@@ -32,15 +35,19 @@ internal class BookServiceTest {
     @Test
     fun findByParams() {
         val books = mutableListOf(Book(0, "test title", "test author", "test publisher"))
+        val spec = and(
+                Book::title.like("%test title%"),
+                Book::author.like("%test author%"),
+                Book::publisher.like("%test publisher%"))
         val mock = mock<BookRepository> {
-            on { findByTitleContainsAndAuthorContainsAndPublisherContains(anyString(), anyString(), anyString()) }.doReturn(books)
+            on { findAll(spec) }.doReturn(books)
         }
-        mock.findByTitleContainsAndAuthorContainsAndPublisherContains(anyString(), anyString(), anyString()).apply {
+        mock.findAll(spec).apply {
             assertThat(this).isNotNull
             assertThat(this).hasSize(1)
             assertThat(this).containsSequence(books)
         }
-        verify(mock, times(1)).findByTitleContainsAndAuthorContainsAndPublisherContains(anyString(), anyString(), anyString())
+        verify(mock, times(1)).findAll(spec)
     }
 
     @Test

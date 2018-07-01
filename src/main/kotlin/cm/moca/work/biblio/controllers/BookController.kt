@@ -31,7 +31,7 @@ class BookController(private val bookService: BookService) {
     fun search(@RequestParam(name = "title", required = false, defaultValue = "") title: String,
                @RequestParam(name = "author", required = false, defaultValue = "") author: String,
                @RequestParam(name = "publisher", required = false, defaultValue = "") publisher: String): ResponseEntity<List<Book>> {
-        return ResponseEntity.ok(bookService.findByTitleContainsAndAuthorContainsAndPublisherContains(title, author, publisher))
+        return ResponseEntity.ok(bookService.findByParams(title, author, publisher))
     }
 
     @PostMapping("", MediaType.TEXT_PLAIN_VALUE, MediaType.APPLICATION_JSON_UTF8_VALUE)

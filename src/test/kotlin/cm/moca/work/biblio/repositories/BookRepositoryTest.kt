@@ -1,5 +1,7 @@
 package cm.moca.work.biblio.repositories
 
+import au.com.console.jpaspecificationdsl.and
+import au.com.console.jpaspecificationdsl.equal
 import cm.moca.work.biblio.entities.Book
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
@@ -34,7 +36,11 @@ internal class BookRepositoryTest {
     @Test
     fun findByParams() {
         val book = entityManager.find(Book::class.java, 123L)
-        val actual = bookRepository.findByTitleContainsAndAuthorContainsAndPublisherContains("title", "", "")
+        val spec = and(
+                Book::title.equal("test title"),
+                Book::author.equal("test author"),
+                Book::publisher.equal("test publisher"))
+        val actual = bookRepository.findAll(spec)
         assertThat(actual).isNotNull
         assertThat(actual).hasSize(1)
         assertThat(actual).first().isEqualTo(book)

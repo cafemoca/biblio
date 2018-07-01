@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>create | spring boot sample</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/css/style.css" th:href="@{/css/style.css}">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" />
+</head>
+<body>
+<header class="header bg-light">
+    <div class="container">
+        <h1>spring boot sample</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active" aria-current="page"><a href="/">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Create</li>
+            </ol>
+        </nav>
+    </div>
+</header>
+<article class="container">
+    <h2>create</h2>
+    <form th:method="post" name="create" th:action="create" th:object="${book}" accept-charset="UTF8">
+        <div class="form-group">
+            <label for="title">title:</label>
+            <input name="title" id="title" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="author">author:</label>
+            <input name="author" id="author" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="publisher">publisher:</label>
+            <input name="publisher" id="publisher" class="form-control">
+        </div>
+        <input type="submit" value="create" class="btn btn-primary btn-wide">
+    </form>
+    <a href="/" class="btn btn-link">back to home</a>
+</article>
+</body>
+</html>

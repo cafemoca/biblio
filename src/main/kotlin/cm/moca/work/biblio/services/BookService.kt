@@ -1,5 +1,6 @@
 package cm.moca.work.biblio.services
 
+import au.com.console.jpaspecificationdsl.*
 import cm.moca.work.biblio.entities.Book
 import cm.moca.work.biblio.repositories.BookRepository
 import org.springframework.transaction.annotation.Transactional
@@ -16,8 +17,8 @@ class BookService(val bookRepository: BookRepository) {
     }
 
     @Transactional(readOnly = true)
-    fun findByTitleContainsAndAuthorContainsAndPublisherContains(title: String, author: String, publisher: String) : List<Book> {
-        return bookRepository.findByTitleContainsAndAuthorContainsAndPublisherContains(title, author, publisher)
+    fun findByParams(title: String, author: String, publisher: String) : List<Book> {
+        return bookRepository.findAll(and(Book::title.like("%$title%"), Book::author.like("%$author%"), Book::publisher.like("%$publisher%")))
     }
 
     @Transactional(readOnly = true)

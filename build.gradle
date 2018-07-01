@@ -40,6 +40,7 @@ compileTestKotlin {
 
 repositories {
     mavenCentral()
+    jcenter()
 }
 
 dependencies {
@@ -53,4 +54,5 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.jetbrains.kotlin:kotlin-test'
     testImplementation 'com.nhaarman:mockito-kotlin:1.5.0'
+    implementation 'au.com.console:kotlin-jpa-specification-dsl:0.1.0'
 }

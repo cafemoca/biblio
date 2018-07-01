@@ -13,13 +13,14 @@
             <h1>spring boot sample</h1>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item active" aria-current="page">Home</li>
+                    <li class="breadcrumb-item active" aria-current="page"><a href="/">Home</a></li>
                 </ol>
             </nav>
         </div>
     </header>
     <article class="container">
         <section>
+            <a href="/create" class="btn btn-primary float-right create-new">create new</a>
             <table class="table">
                 <thead>
                 <tr>
@@ -52,7 +53,7 @@
         <section class="card">
             <h2 class="card-header">search</h2>
             <div class="card-body">
-                <form id="search_form" th:method="get" name="search" accept-charset="UTF8">
+                <form th:method="get" th:action="search" name="search" accept-charset="UTF8">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <label class="input-group-text">title</label>
@@ -72,32 +73,6 @@
                         <input type="text" name="publisher" class="form-control form-control-sm">
                     </div>
                     <input type="submit" value="search" class="btn btn-primary btn-wide">
-                </form>
-            </div>
-        </section>
-        <section class="card">
-            <h2 class="card-header">add new</h2>
-            <div class="card-body">
-                <form id="add_form" th:method="post" name="create" accept-charset="UTF8">
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <label class="input-group-text">title</label>
-                        </div>
-                        <input type="text" name="title" class="form-control form-control-sm">
-                    </div>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <label class="input-group-text">author</label>
-                        </div>
-                        <input type="text" name="author" class="form-control form-control-sm">
-                    </div>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <label class="input-group-text">publisher</label>
-                        </div>
-                        <input type="text" name="publisher" class="form-control form-control-sm">
-                    </div>
-                    <input type="submit" value="add" class="btn btn-primary btn-wide">
                 </form>
             </div>
         </section>

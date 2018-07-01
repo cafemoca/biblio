@@ -27,7 +27,7 @@ class IndexController(private val bookService: BookService) {
                @RequestParam(name = "author", required = false, defaultValue = "") author: String,
                @RequestParam(name = "publisher", required = false, defaultValue = "") publisher: String,
                model: Model): String {
-        val books = bookService.findByTitleContainsAndAuthorContainsAndPublisherContains(title, author, publisher)
+        val books = bookService.findByParams(title, author, publisher)
         model.addAttribute("books", books)
         return "index"
     }
@@ -39,7 +39,12 @@ class IndexController(private val bookService: BookService) {
         return "single"
     }
 
-    @PostMapping("")
+    @GetMapping("create")
+    fun create(model: Model): String {
+        return "create"
+    }
+
+    @PostMapping("create")
     fun create(@ModelAttribute book: Book): String {
         bookService.save(book)
         return "redirect:/"
