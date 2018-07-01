@@ -16,23 +16,13 @@ class BookService(val bookRepository: BookRepository) {
     }
 
     @Transactional(readOnly = true)
+    fun findByTitleContainsAndAuthorContainsAndPublisherContains(title: String, author: String, publisher: String) : List<Book> {
+        return bookRepository.findByTitleContainsAndAuthorContainsAndPublisherContains(title, author, publisher)
+    }
+
+    @Transactional(readOnly = true)
     fun findAll(page: Pageable) : List<Book> {
         return bookRepository.findAll(page).content
-    }
-
-    @Transactional(readOnly = true)
-    fun findByTitle(title: String) : List<Book> {
-        return bookRepository.findByTitle(title)
-    }
-
-    @Transactional(readOnly = true)
-    fun findByAuthor(author: String) : List<Book> {
-        return bookRepository.findByAuthor(author)
-    }
-
-    @Transactional(readOnly = true)
-    fun findByPublisher(publisher: String) : List<Book> {
-        return bookRepository.findByPublisher(publisher)
     }
 
     @Transactional()

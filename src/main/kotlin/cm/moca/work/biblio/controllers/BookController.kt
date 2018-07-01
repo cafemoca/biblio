@@ -27,19 +27,11 @@ class BookController(private val bookService: BookService) {
         return ResponseEntity.ok(bookService.findAll(page))
     }
 
-    @GetMapping("title/{title}", MediaType.APPLICATION_JSON_UTF8_VALUE)
-    fun findByTitle(@PathVariable("title") title: String): ResponseEntity<List<Book>> {
-        return ResponseEntity.ok(bookService.findByTitle(title))
-    }
-
-    @GetMapping("author/{author}", MediaType.APPLICATION_JSON_UTF8_VALUE)
-    fun findByAuthor(@PathVariable("author") author: String): ResponseEntity<List<Book>> {
-        return ResponseEntity.ok(bookService.findByAuthor(author))
-    }
-
-    @GetMapping("publisher/{publisher}", MediaType.APPLICATION_JSON_UTF8_VALUE)
-    fun findByPublisher(@PathVariable("publisher") publisher: String): ResponseEntity<List<Book>> {
-        return ResponseEntity.ok(bookService.findByPublisher(publisher))
+    @GetMapping("search", MediaType.APPLICATION_JSON_UTF8_VALUE)
+    fun search(@RequestParam(name = "title", required = false, defaultValue = "") title: String,
+               @RequestParam(name = "author", required = false, defaultValue = "") author: String,
+               @RequestParam(name = "publisher", required = false, defaultValue = "") publisher: String): ResponseEntity<List<Book>> {
+        return ResponseEntity.ok(bookService.findByTitleContainsAndAuthorContainsAndPublisherContains(title, author, publisher))
     }
 
     @PostMapping("", MediaType.TEXT_PLAIN_VALUE, MediaType.APPLICATION_JSON_UTF8_VALUE)
