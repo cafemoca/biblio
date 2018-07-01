@@ -40,6 +40,13 @@ class BookController(private val bookService: BookService) {
         return ResponseEntity.ok("success")
     }
 
+    @PutMapping("{id}")
+    fun save(@PathVariable("id") id: Long, @RequestBody book: Book): ResponseEntity<String> {
+        book.id = id
+        bookService.save(book)
+        return ResponseEntity.ok("success")
+    }
+
     @DeleteMapping("{id}", MediaType.TEXT_PLAIN_VALUE)
     fun delete(@PathVariable("id") id: Long): ResponseEntity<String> {
         bookService.delete(id)

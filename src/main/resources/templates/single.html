@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${book.title} + ' | spring boot sample'"></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/css/style.css" th:href="@{/css/style.css}">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" />
+</head>
+<body>
+    <header class="header bg-light">
+        <div class="container">
+            <h1>spring boot sample</h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item active" aria-current="page"><a href="/">Home</a></li>
+                    <li th:text="${book.title}" class="breadcrumb-item active" aria-current="page"></li>
+                </ol>
+            </nav>
+        </div>
+    </header>
+    <article class="container">
+        <h2 th:text="${book.title}"></h2>
+        <form th:method="put" name="update" th:action="@{${book.id}}" th:object="${book}" accept-charset="UTF8">
+            <div class="form-group">
+                <span>id:</span>
+                <span th:text="${book.id}" class="form-control"></span>
+            </div>
+            <div class="form-group">
+                <label for="title">title:</label>
+                <input th:field="*{title}" id="title" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="author">author:</label>
+                <input th:field="*{author}" id="author" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="publisher">publisher:</label>
+                <input th:field="*{publisher}" id="publisher" class="form-control">
+            </div>
+            <input type="submit" value="save" class="btn btn-primary btn-wide">
+        </form>
+        <form th:action="@{${book.id}}" th:method="delete">
+            <input type="submit" value="delete" class="btn btn-secondary btn-wide">
+        </form>
+        <a href="/" class="btn btn-link">back to home</a>
+    </article>
+</body>
+</html>
